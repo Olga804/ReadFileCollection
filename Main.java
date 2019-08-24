@@ -5,11 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.TreeMap;
 /*
 Делает: открывает файл; считывает значения; сортирует по порядку;
-считает, сколько раз повторяется слово; предусмотрен ввод абсолютного пути к файлу;
+считает, сколько раз повторяется слово;выводит слово, которое
+повторяется максимальное количество раз,если несколько слов повторяются
+одинаковое количество раз выводит все; предусмотрен ввод абсолютного пути к файлу;
 работает только с латиницей;
 
-Не делает: вывести слово встречающееся максимальное количество раз и его частоту повторений;
-предусмотреть ввод относительного пути к файлу; ввод русских букв в файле;
+Не делает: предусмотреть ввод относительного пути к файлу; ввод русских букв в файле;
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -25,13 +26,26 @@ public class Main {
                cout=0;
            }
            statistics.put(word, ++cout);
-
+             if (statistics.get(word)>max){
+               max=statistics.get(word);
+           }
            }
        for (Map.Entry item:
                 statistics.entrySet()) {
             System.out.println(item);
 
        }
+        System.out.println("Maximum:");
+
+        for (String key:
+             collection) {
+            Integer i=statistics.get(key);
+            if(max.equals(i)){
+                System.out.print(key+" ");
+                System.out.println(max);
+            }
+
+        }
 
     }
 
