@@ -20,8 +20,9 @@ public class Main {
                path = in.nextLine();
 
            }
-           Scanner scanner = new Scanner(new File(path),"Cp1251");//Добавила "Cp1251" потому что без нее не распознавал кириллицу.
-
+           Scanner scanner = new Scanner(new File(path),"Cp1251");
+            //Добавила "Cp1251" потому что без этого у меня не распознавало кириллицу
+                   
          /*JButton open = new JButton();
            JFileChooser fc = new JFileChooser();
            fc.setCurrentDirectory(new java.io.File("*.txt"));
