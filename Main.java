@@ -7,8 +7,7 @@ import java.util.TreeMap;
 Исправлено: добавлена обработка исключения, если файл не найден;
             добавлен ввод пути к файлу с клавиатуры
             добавлена обработка длинных тире (если " - " считается длинным тире)
-            пробелы за слова у меня не считались и в предыдущей версии
-
+            
 
  */
 public class Main {
@@ -21,7 +20,7 @@ public class Main {
                path = in.nextLine();
 
            }
-           Scanner scanner = new Scanner(new File(path));
+           Scanner scanner = new Scanner(new File(path),"Cp1251");//Добавила "Cp1251" потому что без нее не распознавал кириллицу.
 
          /*JButton open = new JButton();
            JFileChooser fc = new JFileChooser();
