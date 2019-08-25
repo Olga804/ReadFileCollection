@@ -4,10 +4,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 /*
-Исправлено: добавлена обработка исключения, если файл не найден;
-            добавлен ввод пути к файлу с клавиатуры
-            добавлена обработка длинных тире (если " - " считается длинным тире)
-            
+Исправлено: добавлена обработка длинных тире, многоточия и ковычки
+
+
 
  */
 public class Main {
@@ -21,8 +20,8 @@ public class Main {
 
            }
            Scanner scanner = new Scanner(new File(path));
-            //Добавила "Cp1251" потому что без этого у меня не распознавало кириллицу
-                   
+           //Добавила "Cp1251", что бы у меня распознавало кириллицу
+
          /*JButton open = new JButton();
            JFileChooser fc = new JFileChooser();
            fc.setCurrentDirectory(new java.io.File("*.txt"));
@@ -41,7 +40,7 @@ public class Main {
            Integer max = 0;
            double all = 0;
            while (scanner.hasNext()) {
-               String word = scanner.useDelimiter("[\\s,-.;:()!?]+").next();
+               String word = scanner.useDelimiter("[\\s,-.;:()\"—…]+").next();
                Integer cout = statistics.get(word);
                if (cout == null) {
                    cout = 0;
