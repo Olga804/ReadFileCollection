@@ -2,55 +2,79 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
 import java.util.TreeMap;
 /*
-Делает: открывает файл; считывает значения; сортирует по порядку;
-считает, сколько раз повторяется слово;выводит слово, встречающееся
-максимальное количество раз  его частоту, если таких слов несколько, выводит все;
+Исправлено: добавлена обработка исключения, если файл не найден;
+            добавлен ввод пути к файлу с клавиатуры
+            добавлена обработка длинных тире (если " - " считается длинным тире)
+            пробелы за слова у меня не считались и в предыдущей версии
 
-Не делает: не работает с русским текстом;
+
  */
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-       Scanner scanner=new Scanner(new File("test.txt"));
-       Map<String,Integer>statistics=new TreeMap<>();
-       Collection<String>collection=statistics.keySet();
+    public static void main(String[] args) {
+       try {
+           String path = "";
+           if (path==""){
+               Scanner in=new Scanner(System.in);
+               System.out.println("Введите путь к файлу: ");
+               path = in.nextLine();
+
+           }
+           Scanner scanner = new Scanner(new File(path));
+
+         /*JButton open = new JButton();
+           JFileChooser fc = new JFileChooser();
+           fc.setCurrentDirectory(new java.io.File("*.txt"));
+           fc.setDialogTitle("Open your TestFile");
+           fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+           if(fc.showOpenDialog(open)==JFileChooser.APPROVE_OPTION){
+               System.out.println("You chose: " + fc.getSelectedFile().getAbsolutePath());
+           }
+
+          */
+
+           Map<String, Integer> statistics = new TreeMap<>();
+           Collection<String> collection = statistics.keySet();
 
 
-       Integer max=0;
-       double all=0;
-       while(scanner.hasNext()){
-           String word=scanner.useDelimiter("\\s+|,+|\\.+|;+|'+|\"+").next();
-           Integer cout=statistics.get(word);
-           if(cout==null){
-               cout=0;
-           }
-           statistics.put(word, ++cout);
-           all++;
+           Integer max = 0;
+           double all = 0;
+           while (scanner.hasNext()) {
+               String word = scanner.useDelimiter("[\\s,-.;:()]+").next();
+               Integer cout = statistics.get(word);
+               if (cout == null) {
+                   cout = 0;
+               }
+               statistics.put(word, ++cout);
+               all++;
 
-           if (statistics.get(word)>max){
-               max=statistics.get(word);
+               if (statistics.get(word) > max) {
+                   max = statistics.get(word);
+               }
            }
+           for (Map.Entry item :
+                   statistics.entrySet()) {
+               System.out.println(item);
            }
-       for (Map.Entry item:
-                statistics.entrySet()) {
-            System.out.println(item);
+           System.out.println("Maximum:");
+
+           for (String key :
+                   collection) {
+               Integer i = statistics.get(key);
+               if (max.equals(i)) {
+                   System.out.print(key + " ");
+                   System.out.println("repeat " + max + " times");
+                   System.out.println("frequency:" + max / all);
+
+
+               }
+
+
+           }
+       } catch (Exception e){
+           System.out.println("Файл не найден!");
        }
-        System.out.println("Maximum:");
-
-        for (String key:
-             collection) {
-            Integer i=statistics.get(key);
-            if(max.equals(i)){
-                System.out.print(key+" ");
-                System.out.println("repeat "+max+" times");
-                System.out.println("frequency:"+max/all);
-
-        }
-
-
-        }
 
 
 
