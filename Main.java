@@ -20,7 +20,7 @@ public class Main {
                path = in.nextLine();
 
            }
-           Scanner scanner = new Scanner(new File(path),"Cp1251");
+           Scanner scanner = new Scanner(new File(path));
             //Добавила "Cp1251" потому что без этого у меня не распознавало кириллицу
                    
          /*JButton open = new JButton();
