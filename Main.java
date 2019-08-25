@@ -41,7 +41,7 @@ public class Main {
            Integer max = 0;
            double all = 0;
            while (scanner.hasNext()) {
-               String word = scanner.useDelimiter("[\\s,-.;:()]+").next();
+               String word = scanner.useDelimiter("[\\s,-.;:()!?]+").next();
                Integer cout = statistics.get(word);
                if (cout == null) {
                    cout = 0;
